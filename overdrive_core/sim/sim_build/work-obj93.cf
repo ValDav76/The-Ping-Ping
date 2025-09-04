@@ -1,0 +1,4 @@
+v 4
+file / "/home/ubuntu/repos/ping-ping/sim/../rtl/disto_core.vhd" "2957a3e9e865afa7aae02b15ac61214ca58de65c" "20250904161633.457":
+  entity disto_core at 1( 0) + 4 on 11;
+  architecture rtl of disto_core at 26( 755) + 4 on 12;
