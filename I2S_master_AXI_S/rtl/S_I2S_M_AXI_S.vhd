@@ -34,7 +34,7 @@ begin
         else
             if rising_edge(sck) then
                 if m_axi_s_tready = '1' then
-                    tvalid <= '1';
+                    tvalid <= '0';
                 end if;
 
                 case FSM is
