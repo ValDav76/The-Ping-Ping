@@ -49,23 +49,28 @@ async def uut(dut):
     ip.sdata.value = random.randint(0, 1)
     await RisingEdge(ip.clk)
 
-    for i in range(4):
+    for i in range(6):
         for j in range(16):
             sample.append(random.randint(0, 1))
             ip.sdata.value = sample[-1]
             await RisingEdge(ip.clk)
 
         ip.lrck.value = int(ip.lrck.value) ^ 1
-    #     print(len(sample))
-    #     inject_val = 0
-    #     for i in sample:
-    #         inject_val = (inject_val << 1) | i
+        #print(len(sample))
+        inject_val = 0
+        for i in sample:
+            inject_val = (inject_val << 1) | i
         
-    #     sample = []
+        sample = []
         
         frame = await ip.axis_sink.recv()
+
         print(frame.tdata[1]) 
+        print(frame.tdata[0])
+
+        val = (frame.tdata[1] << 8) | frame.tdata[0]
+        print(val)
     
-    #assert bin(val) == bin(inject_val), 'error'
+        assert bin(val) == bin(inject_val), 'error'
     
         
