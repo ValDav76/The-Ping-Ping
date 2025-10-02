@@ -1,0 +1,6 @@
+<testsuites name="results">
+  <testsuite name="all" package="all">
+    <property name="random_seed" value="1759007918" />
+    <testcase name="uut" classname="testbench" file="/home/ubuntu/.local/lib/python3.12/site-packages/cocotb/decorators.py" lineno="34" time="0.0240325927734375" sim_time_ns="24671.601" ratio_time="1026589.2337371428" />
+  </testsuite>
+</testsuites>
