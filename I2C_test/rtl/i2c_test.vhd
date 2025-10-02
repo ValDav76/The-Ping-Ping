@@ -78,10 +78,10 @@ architecture rtl of i2c_test is
                         i := 0;
 
                     when INIT =>
-                            wb_adr_o <= init_addr_list(i)(2 downto 0);
-                            wb_dat_o <= init_data_list(i);
-                            wb_we_o <= '1'; 
-                            wb_cyc_o <= '1';
+
+                        wb_we_o <= '1'; 
+                        wb_cyc_o <= '1';
+
                         if i = 0 then 
                             wb_stb <= '1';
                         end if; 
@@ -92,17 +92,21 @@ architecture rtl of i2c_test is
                         end if;
 
                         if wb_ack_i = '1' then
-                            wb_stb <= '1';
                             i := i+1;
-                            if i = 2 then
-                                fsm <= IDLE;
-                                wb_adr_o <= (others => '0');
-                                wb_dat_o <= (others => '0');
-                                wb_we_o <= '0';
-                                wb_cyc_o <= '0';
-                                wb_stb <= '0';
-                                i := 0;
-                            end if;
+                            wb_stb <= '1';
+                        end if;
+
+                        if i = 2 then
+                            fsm <= IDLE;
+                            wb_adr_o <= (others => '0');
+                            wb_dat_o <= (others => '0');
+                            wb_we_o <= '0';
+                            wb_cyc_o <= '0';
+                            wb_stb <= '0';
+                            i := 0;
+                        else
+                            wb_adr_o <= init_addr_list(i)(2 downto 0);
+                            wb_dat_o <= init_data_list(i);
                         end if;
 
                     when IDLE =>
@@ -111,11 +115,12 @@ architecture rtl of i2c_test is
                         end if; 
                     
                     when SEND =>
-                        wb_adr_o <= test_addr(i)(2 downto 0);
-                        wb_dat_o <= test_data(i);
                         wb_we_o <= '1';
                         wb_cyc_o <= '1';
-                        wb_stb <= '1';
+                        
+                        if i=0 then
+                            wb_stb <= '1';
+                        end if;
 
                         if wb_stb = '1' then
                             wb_stb <= '0';
@@ -124,16 +129,22 @@ architecture rtl of i2c_test is
 
                         if wb_ack_i = '1' then
                             i := i+1;
-                            if i = 4 then
-                                i := 0;
-                                fsm <= IDLE;
-                                wb_adr_o <= (others => '0');
-                                wb_dat_o <= (others => '0');
-                                wb_we_o <= '0';
-                                wb_cyc_o <= '0';
-                                wb_stb <= '0';
-                            end if;
+                            wb_stb <= '1';
                         end if;
+                        
+                        if i = 4 then
+                            fsm <= IDLE;
+                            wb_adr_o <= (others => '0');
+                            wb_dat_o <= (others => '0');
+                            wb_we_o <= '0';
+                            wb_cyc_o <= '0';
+                            wb_stb <= '0';
+                            i := 0;
+                        else
+                            wb_adr_o <= test_addr(i)(2 downto 0);
+                            wb_dat_o <= test_data(i);
+                        end if;
+                        
                 end case;
                 if wb_rst_i = '1' then
                     fsm <= RESET;
