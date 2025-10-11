@@ -1,4 +1,7 @@
-Welcome on the Ping Ping project 🤘
+**Welcome on the Ping Ping project 🤘**
+
+![81f3b7a4-b5e5-414a-a2e0-19aac4d8ec19](https://github.com/user-attachments/assets/5925cfe0-8dbd-4eca-8838-674eccd27444)
+
 
 A fully digital guitar effects pedal built entirely with FPGA logic.
 
@@ -36,3 +39,6 @@ Includes full serial/parallel and parallel/serial conversion
  []  Add real-time effect parameter control via I²C
 
  []  Implement additional effects (e.g., reverb, delay, EQ
+
+
+ 0
