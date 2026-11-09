@@ -1,0 +1,25 @@
+#temporaire
+sim/
+*.ini
+
+
+# Python
+.venv/
+__pycache__/
+*.pyc
+.pytest_cache/
+
+# Cocotb
+results.xml
+*.result.xml
+sim_build/
+
+# GHDL
+*.o
+*.cf
+*.ghw
+*.vcd
+*.fst
+*.fst.gz
+e~*
+work-obj*.cf
