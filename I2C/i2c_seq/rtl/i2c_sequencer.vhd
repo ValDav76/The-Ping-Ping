@@ -328,7 +328,7 @@ begin
             done <= '1';
 
         when ERROR_ACK => 
-            null;
+            err <= '1';
         
         when SET_NACK => 
             wb_adr_o <= C_I2C_CR_SR_ADDR;
