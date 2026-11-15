@@ -1,8 +1,3 @@
-#temporaire
-sim/
-*.ini
-
-
 # Python
 .venv/
 __pycache__/
