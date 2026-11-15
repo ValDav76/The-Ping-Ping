@@ -1,3 +1,5 @@
+# README IS OBSOLETE FOR NOW ! (Modifiction incoming)
+
 # Projet FPGA
 
 ## Arborescence

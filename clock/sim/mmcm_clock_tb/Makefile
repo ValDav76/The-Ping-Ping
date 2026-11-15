@@ -16,7 +16,7 @@ COMPILE_ARGS += -frelaxed-rules
 COMPILE_ARGS += -fexplicit
 
 # Precompiled Xilinx libraries
-UNISIMDIR = /home/val/.xilinx-vivado/unisim/v93
+UNISIMDIR = /home/val/repos/Xilinx_lib/vhdl/xilinx-vivado/unisim/v08
 
 COMPILE_ARGS += -P$(UNISIMDIR)
 
@@ -27,7 +27,7 @@ COMPILE_ARGS += -P$(UNISIMDIR)
 VHDL_LIB_ORDER = clk_lib
 
 VHDL_SOURCES_clk_lib = \
-    $(PWD)/../rtl/mmcm_clock.vhd
+    $(PWD)/../../rtl/mmcm_clock.vhd
 
 # ============================================================
 # Cocotb

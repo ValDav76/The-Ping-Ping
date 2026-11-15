@@ -52,17 +52,17 @@ begin
     end process;
 
     -- 12.288 MHz reset synchronizer
-    process(clk_12m, arst_global)
+    process(clk_12m288, arst_global)
     begin
         if arst_global = '1' then
             sync_12m <= "11";
 
-        elsif rising_edge(clk_12m) then
+        elsif rising_edge(clk_12m288) then
             sync_12m <= sync_12m(0) & '0';
         end if;
     end process;
 
     rst_100m <= sync_100m(1);
-    rst_12m  <= sync_12m(1);
+    rst_12m288  <= sync_12m(1);
 
 end architecture;
