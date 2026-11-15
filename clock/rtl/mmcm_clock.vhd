@@ -1,4 +1,3 @@
-
 library ieee;
 use ieee.std_logic_1164.all;
 
@@ -13,8 +12,7 @@ entity mmcm_clock is
         clk_12m288   : out std_logic;
         clk_100m     : out std_logic;
 
-        locked_12m288   : out std_logic;
-        locked_100m     : out std_logic
+        locked       : out std_logic
     );
 end entity mmcm_clock;
 
@@ -31,6 +29,9 @@ architecture rtl of mmcm_clock is
     signal clk_fb_2     : std_logic;
     signal clk_fb_buf_2 : std_logic;
     signal clk_mmcm_2   : std_logic;
+
+    signal locked_12m288    : std_logic;
+    signal locked_100m      : std_logic;
 
 begin
 
@@ -149,5 +150,9 @@ begin
         I => clk_mmcm_2,
         O => clk_100m
     );
+
+    -- global locked
+
+    locked <= locked_12m288 and locked_100m;
 
 end architecture rtl;

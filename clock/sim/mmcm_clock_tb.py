@@ -60,7 +60,7 @@ async def test_mmcm_clock(dut):
 
     try:
         await with_timeout(
-            RisingEdge(dut.locked_12m288),
+            RisingEdge(dut.locked),
             100,
             "us"
         )
@@ -111,19 +111,6 @@ async def test_mmcm_clock(dut):
     # =================================================
     # Wait for MMCM lock (100MHz)
     # =================================================
-
-    if not dut.locked_100m.value:
-        try:
-            await with_timeout(
-                RisingEdge(dut.locked_100m),
-                100,
-                "us"
-            )
-        except Exception:
-            
-            assert False, "MMCM failed to lock"
-
-    dut._log.info("MMCM 1 locked")
 
     # =================================================
     # Check output clock frequency
