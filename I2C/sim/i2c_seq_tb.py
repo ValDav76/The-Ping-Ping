@@ -11,6 +11,38 @@ from cocotb.triggers import (
 from cocotbext.i2c import I2cMemory
 
 
+from cocotb.triggers import RisingEdge, FallingEdge
+from cocotb.utils import get_sim_time
+
+async def monitor_i2c_speed(dut):
+
+    while True:
+
+        # Attente front montant
+        await RisingEdge(dut.scl_bus)
+        t_rise = get_sim_time(unit="ns")
+
+        # Attente front descendant
+        await FallingEdge(dut.scl_bus)
+        t_fall = get_sim_time(unit="ns")
+
+        # Attente front montant suivant
+        await RisingEdge(dut.scl_bus)
+        t_next_rise = get_sim_time(unit="ns")
+
+        t_high = t_fall - t_rise
+        t_low = t_next_rise - t_fall
+        period = t_next_rise - t_rise
+
+        freq = 1e9 / period
+
+        dut._log.info(
+            f"SCL: {freq / 1e3:.2f} kHz"
+        )
+
+        assert period >= 10_000, \
+            f"I2C clock too fast: {freq:.2f} Hz"
+
 @cocotb.test()
 async def test_i2c_write(dut):
 
@@ -20,6 +52,10 @@ async def test_i2c_write(dut):
 
     cocotb.start_soon(
         Clock(dut.clk, 10, unit="ns").start()
+    )
+
+    cocotb.start_soon(
+        monitor_i2c_speed(dut)
     )
 
     # ================================================

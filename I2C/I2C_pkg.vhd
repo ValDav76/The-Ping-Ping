@@ -4,7 +4,7 @@ use ieee.numeric_std.all;
 
 package I2C_pkg is
 
-    constant C_MAIN_FREQ    : integer := 50_000_000;
+    constant C_MAIN_FREQ    : integer := 100_000_000;
     constant C_SCL_FREQ     : integer := 100_000;
 
     constant C_PRESCALE_WIDTH   : integer := 16;
